@@ -1,0 +1,94 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    color: #333;
+    position: relative;
+    border: 1px solid gray;
+  }
+  
+  .nav-logo img {
+    width: 120px;
+  }
+  
+  /* Default styling for the navigation links */
+  .nav-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-links a {
+    color: black;
+    font-size: large;
+    font-weight: 400;
+    text-decoration: none;
+  }
+  
+  /* Full-screen menu toggle button for small screens */
+  .menu-toggle {
+    display: none;
+    font-size: 24px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Full-screen overlay styling for small screens */
+  .full-screen-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 20;
+  }
+  
+  .full-screen-menu a {
+    font-size: 24px;
+    color: white;
+    margin: 20px 0;
+    text-decoration: none;
+  }
+  
+  .close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Media query to adjust for small screens */
+  @media (max-width: 768px) {
+    .nav{
+        padding: 10px 20px;
+    }
+    /* Hide default nav links on small screens */
+    .nav-links {
+      display: none;
+    }
+  
+    /* Display the menu toggle button */
+    .menu-toggle {
+      display: block;
+      color: #333;
+    }
+  
+    /* Show the full-screen overlay menu when open */
+    .full-screen-menu {
+      display: flex;
+    }
+  }
+  

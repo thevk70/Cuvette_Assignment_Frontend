@@ -1,0 +1,51 @@
+.wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+.lorem-con {
+  flex: 1 1 45%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.lorem-txt {
+  padding: 10px;
+}
+.signup {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #213ec0;
+  border-radius: 5px;
+  flex: 1 1 22%;
+  padding: 10px 20px 10px 20px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .signup {
+    flex: 1 1 100%;
+  }
+  .lorem-con {
+    display: none;
+  }
+}
+.btn-con {
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  width: -webkit-fill-available;
+}
+.btn {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #213ec0;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  max-width: 80%;
+}

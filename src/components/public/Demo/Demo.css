@@ -1,0 +1,54 @@
+.tags-input {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 4px 10px;
+    margin: 5px 5px 5px 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .tag-icon {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .remove-tag {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    padding: none;
+  }
+  
+  .remove-tag:hover {
+    color: #555;
+  }
+  
+  .tags-input input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+    min-width: 150px;
+    background-color: transparent;
+  }
+  

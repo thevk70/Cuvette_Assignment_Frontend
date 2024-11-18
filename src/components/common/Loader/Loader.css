@@ -1,0 +1,63 @@
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8); /* Light transparent background */
+    z-index: 1000; /* Ensure it overlays other content */
+    pointer-events: none; /* Prevent clicks behind the loader */
+  }
+  
+  .loader {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100vmin;
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+  
+  .circular {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transform-origin: center center;
+    animation: 2s linear infinite rotate;
+  }
+  
+  .path {
+    stroke: coral;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: 1.5s ease-in-out infinite dash;
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+      stroke: yellow;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  
