@@ -1,5 +1,5 @@
 function getBaseUrl() {
-  return "https://jobpost-backend-ew6d.onrender.com";
+  return "https://jobpost-backend-ew6d.onrender.com/";
   //return "http://localhost:7289/";
 }
 
