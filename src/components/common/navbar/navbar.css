@@ -69,6 +69,16 @@
     color: white;
     cursor: pointer;
   }
+
+  .logout-btn{
+    color: black;
+    font-size: large;
+    font-weight: 300;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    padding-top: 3px;
+  }
   
   /* Media query to adjust for small screens */
   @media (max-width: 768px) {
@@ -89,6 +99,12 @@
     /* Show the full-screen overlay menu when open */
     .full-screen-menu {
       display: flex;
+    }
+    .logout-btn{
+    font-size: 24px;
+    color: white;
+    margin: 10px 0;
+    text-decoration: none;
     }
   }
   

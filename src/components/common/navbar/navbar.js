@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./navbar.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { setLoggedIn } from "../../../actions/UserAction";
 
-function Navbar() {
-  const nevigate = useNavigate();
+function Navbar(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const isLogIn = useSelector((store) => store.status);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
+    if (!sessionStorage.getItem("token")) {
+      dispatch(setLoggedIn(false));
     }
-    console.log(isLoggedIn);
-    
-  }, []);
+  }, [dispatch]);
 
+  // const isLogIn = props.isLogIn;
   const handleLogOut = () => {
-    sessionStorage.removeItem("token");
-    setIsLoggedIn(false);
-    nevigate("/login");
-  }
+      sessionStorage.removeItem("token");
+      dispatch(setLoggedIn(false));
+      navigate("/login", { replace: true });
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,9 +45,13 @@ function Navbar() {
 
       {/* Links for large screens and overlay for small screens */}
       <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-        {!isLoggedIn &&<a href="/login">Login</a>}
-        {!isLoggedIn && <a href="/">SignUp</a>}
-        {isLoggedIn &&<a href="#" onClick={handleLogOut}>Logout</a>}
+        {!isLogIn && <Link to="/login">Login</Link>}
+        {!isLogIn && <Link to="/">SignUp</Link>}
+          {isLogIn && 
+            <button className="logout-btn" onClick={handleLogOut}>
+              Logout
+            </button>
+          }
         <a href="mailto:thevk70@gmail.com" className="contact-txt">
           Contact
         </a>
@@ -57,9 +63,13 @@ function Navbar() {
           <button className="close-menu" onClick={toggleMenu}>
             ✕
           </button>
-          {!isLoggedIn && <a href="/login">Login</a>}
-          {!isLoggedIn && <a href="/">SignUp</a>}
-          {isLoggedIn && <a href="#" onClick={handleLogOut}>Logout</a>}
+          {!isLogIn && <Link to="/login">Login</Link>}
+          {!isLogIn && <Link to="/">SignUp</Link>}
+            {isLogIn && 
+              <button className="logout-btn" onClick={handleLogOut}>
+                Logout
+              </button>
+            }
           <a href="mailto:thevk70@gmail.com" className="contact-txt">
             Contact
           </a>

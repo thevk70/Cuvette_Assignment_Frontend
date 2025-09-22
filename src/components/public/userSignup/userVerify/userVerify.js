@@ -2,12 +2,11 @@ import InputBox from "../../../common/Input/input";
 import { BiSolidPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import "./userVerify.css";
-import { useState } from "react";
-import { userVerify } from "../../../../actions/UserAction";
+import { useEffect, useState } from "react";
+import { userVerify,setVerification } from "../../../../actions/UserAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBaseUrl } from "../../../../config/utility";
-import Store from "../../../../store/Store";
 import Loader from "../../../common/Loader/Loader";
 
 function UserVerification() {
@@ -20,6 +19,13 @@ function UserVerification() {
   const nevigate = useNavigate();
 
   const userResponse = useSelector((Store) => Store.user);
+
+  useEffect(() => {
+    if (!userResponse.otpResponse) {
+      dispatch(setVerification(false));
+      nevigate("/login", { replace: true });
+    }
+  }, [nevigate, userResponse.otpResponse]);
 
   const handleVerification = () => {
     setIsSubmit(true);
@@ -34,6 +40,7 @@ function UserVerification() {
       dispatch(
         userVerify(getBaseUrl() + "user/verifyOTP", verificationObj)
       ).then(() => {
+        dispatch(setVerification(false));
         setIsLoading(false);
         nevigate("/login");
       });

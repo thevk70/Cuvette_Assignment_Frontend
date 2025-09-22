@@ -3,6 +3,8 @@ import {
   LOGIN_USER,
   USER_VERIFICATION,
   userAuth,
+  is_Verify,
+  is_LoggedIn,
   USER_AUTHORIZATION,
   POST_JOB,
 } from "../actiontypes/ActionTypes";
@@ -63,7 +65,7 @@ const postJob = (url, obj) => {
   };
 };
 
-const userAuthorization = (url,token) => {
+const userAuthorization = (url, token) => {
   return {
     type: USER_AUTHORIZATION,
     resolve: true,
@@ -77,6 +79,20 @@ const userAuthorization = (url,token) => {
   };
 };
 
+const setLoggedIn = (isLoggedIn) => {
+  return {
+    type: is_LoggedIn,
+    payload: isLoggedIn,
+  };
+};
+
+const setVerification = (isVerify) => {
+  return {
+    type: is_Verify,
+    payload: isVerify,
+  };
+};
+
 const setAuthorization = (isAuth) => {
   return {
     type: userAuth,
@@ -84,4 +100,12 @@ const setAuthorization = (isAuth) => {
   };
 };
 
-export { createUser, loginUser, userVerify,postJob, setAuthorization };
+export {
+  createUser,
+  loginUser,
+  userVerify,
+  postJob,
+  setAuthorization,
+  setVerification,
+  setLoggedIn,
+};

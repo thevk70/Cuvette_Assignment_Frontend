@@ -17,22 +17,34 @@ const JobForm = () => {
   const [title, setTiltle] = useState("");
   const [description, setDescription] = useState("");
   const [salary, setSalary] = useState("");
-  const [exprienceLevel, setExprienceLevel] = useState("");
+  const [experienceLevel, setExperienceLevel] = useState("");
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState("");
-  const [candidateEmails, setCandidateEmails] = useState([]);
+  const [addCandidates, setaddCandidates] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmit, setIsubmit] = useState(false);
 
   const send = () => {
+  //   const newJob = {
+  //     title,
+  //     description,
+  //     location,
+  //     salary,
+  //     exprienceLevel,
+  //     endDate,
+  //     candidateEmails
+  // };
+  //   dispatch(postJob(getBaseUrl() + "job/createJob", newJob)).then(() =>
+  //     setIsLoading(false)
+  //   );
     if (
       title &&
       description &&
-      salary &&
       location &&
-      exprienceLevel &&
+      salary &&
+      experienceLevel &&
       endDate &&
-      candidateEmails
+      addCandidates
     ) {
       const User = jwtDecode(sessionStorage.getItem("token"));
       const newJob = {
@@ -40,11 +52,13 @@ const JobForm = () => {
         description,
         salary,
         location,
-        exprienceLevel,
+        experienceLevel,
         endDate,
-        candidateEmails,
+        addCandidates,
         userId: User._id,
       };
+      console.log(newJob);
+      
       setIsLoading(true);
       dispatch(postJob(getBaseUrl() + "job/createJob", newJob)).then(() =>
         setIsLoading(false)
@@ -98,8 +112,8 @@ const JobForm = () => {
           <select
             className="experienceLevel"
             name="experienceLevel"
-            value={exprienceLevel}
-            onChange={(e) => setExprienceLevel(e.target.value)}
+            value={experienceLevel}
+            onChange={(e) => setExperienceLevel(e.target.value)}
           >
             <option value="junior">Junior (0-2 years)</option>
             <option value="mid">Mid-Level (2-5 years)</option>
@@ -112,6 +126,7 @@ const JobForm = () => {
           <InputBox
             placeholder="Salary"
             icon={<AiOutlineDollar />}
+            type="number"
             isSubmit={isSubmit}
             value={salary}
             onChange={setSalary}
@@ -119,7 +134,8 @@ const JobForm = () => {
         </div>
         <div className="field">
           <label className="label">Add Candidate</label>
-          <TagsInput tags={candidateEmails} setTags={setCandidateEmails} />
+          <TagsInput tags={addCandidates} setTags={setaddCandidates} />
+          
         </div>
 
         <div className="field">

@@ -94,3 +94,19 @@
     border-radius: 6px;
   }
 }
+
+.success-progress {
+  background-color: #4caf50; /* green */
+}
+
+.error-progress {
+  background-color: #f44336; /* red */
+}
+
+.warning-progress {
+  background-color: #ff9800; /* orange */
+}
+
+.info-progress {
+  background-color: #2196f3; /* blue */
+}

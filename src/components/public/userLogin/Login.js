@@ -2,31 +2,24 @@ import { AiOutlineMail } from "react-icons/ai";
 import { AiTwotoneLock } from "react-icons/ai";
 import InputBox from "../../common/Input/input";
 import "./Login.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../../actions/UserAction";
+import { loginUser, setLoggedIn } from "../../../actions/UserAction";
 import { getBaseUrl } from "../../../config/utility";
 import Loader from "../../common/Loader/Loader";
 
 function Login() {
   const dispatch = useDispatch();
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
   const [isSubmit, setIsubmit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [companyEmail, setComapanyEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const response = useSelector(Store => Store.user);
+   const response = useSelector((store) => store.user);
 
-  useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (token) {
-      nevigate("/jobForm");
-    }
-  },)
-
-  const handleLogin = () => {
+  const handleLogin = (response) => {
     if (companyEmail && password) {
       let loginObj = {
         companyEmail: companyEmail,
@@ -34,10 +27,13 @@ function Login() {
       };
       setIsLoading(true);
       dispatch(loginUser(getBaseUrl() + "user/loginUser", loginObj)).then(
-        () => {
-          sessionStorage.setItem("token",response.token);
-          setIsLoading(false);
-          nevigate("/jobForm");
+        (response) => {
+          if (response?.token) {
+            sessionStorage.setItem("token", response.token);
+            dispatch(setLoggedIn(true));
+            navigate("/jobForm");
+          }
+          setIsLoading(false);  
         }
       );
     } else {
@@ -79,7 +75,7 @@ function Login() {
             isSubmit={isSubmit}
           />
           <div className="btn-con">
-            <button className="btn" onClick={handleLogin}>
+            <button className="btn" onClick={() => handleLogin(response)}>
               LogIn
             </button>
           </div>

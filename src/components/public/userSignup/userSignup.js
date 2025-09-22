@@ -13,7 +13,7 @@ import {
 } from "../../common/Verification/verification";
 import "./userSignup.css";
 import { useState, useEffect } from "react";
-import { createUser } from "../../../actions/UserAction";
+import { createUser,setVerification } from "../../../actions/UserAction";
 import { getBaseUrl } from "../../../config/utility";
 import Error from "../../common/error/Error";
 import Toast from "../../common/toast/Toast";
@@ -40,7 +40,7 @@ function SignUp() {
 
   useEffect(() => {
     if (errorMsg) {
-      setToastVisible(true); // Show toast whenever errorMsg changes
+      setToastVisible(true);
     }
   }, [errorMsg]);
 
@@ -73,6 +73,7 @@ function SignUp() {
                 createUser(getBaseUrl() + "user/createUser", newUserObj)
               ).then(() => {
                 setIsLoading(false);
+                dispatch(setVerification(true));
                 nevigate("/verification");
               });
             } else {
@@ -192,9 +193,9 @@ function SignUp() {
             required={true}
             isSubmit={isSubmit}
           />
-          <p>By clicking on proceed you will accepting our</p>
-          <a href="#" style={{ textDecoration: "none" }}>
-            term<span style={{ color: "black" }}> & </span>condition
+          <p style={{textAlign:"center", marginTop:"10px"}}>By clicking on proceed you will accepting our</p>
+          <a href="#" style={{ textDecoration: "none",textAlign:"center",marginBottom:"20px" }}>
+            term<span style={{ color: "black",textAlign:"center" }}> & </span>condition
           </a>
 
           <div className="btn-con">
