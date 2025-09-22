@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedIn } from "../../../actions/UserAction";
 
-function Navbar(props) {
+function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,9 +19,9 @@ function Navbar(props) {
 
   // const isLogIn = props.isLogIn;
   const handleLogOut = () => {
-      sessionStorage.removeItem("token");
-      dispatch(setLoggedIn(false));
-      navigate("/login", { replace: true });
+    sessionStorage.removeItem("token");
+    dispatch(setLoggedIn(false));
+    navigate("/login", { replace: true });
   };
 
   const toggleMenu = () => {
@@ -47,11 +47,11 @@ function Navbar(props) {
       <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
         {!isLogIn && <Link to="/login">Login</Link>}
         {!isLogIn && <Link to="/">SignUp</Link>}
-          {isLogIn && 
-            <button className="logout-btn" onClick={handleLogOut}>
-              Logout
-            </button>
-          }
+        {isLogIn && (
+          <button className="logout-btn" onClick={handleLogOut}>
+            Logout
+          </button>
+        )}
         <a href="mailto:thevk70@gmail.com" className="contact-txt">
           Contact
         </a>
@@ -63,14 +63,32 @@ function Navbar(props) {
           <button className="close-menu" onClick={toggleMenu}>
             ✕
           </button>
-          {!isLogIn && <Link to="/login">Login</Link>}
-          {!isLogIn && <Link to="/">SignUp</Link>}
-            {isLogIn && 
-              <button className="logout-btn" onClick={handleLogOut}>
-                Logout
-              </button>
-            }
-          <a href="mailto:thevk70@gmail.com" className="contact-txt">
+          {!isLogIn && (
+            <Link onClick={toggleMenu} to="/login">
+              Login
+            </Link>
+          )}
+          {!isLogIn && (
+            <Link onClick={toggleMenu} to="/">
+              SignUp
+            </Link>
+          )}
+          {isLogIn && (
+            <button
+              className="logout-btn"
+              onClick={() => {
+                handleLogOut();
+                toggleMenu();
+              }}
+            >
+              Logout
+            </button>
+          )}
+          <a
+            onClick={toggleMenu}
+            href="mailto:thevk70@gmail.com"
+            className="contact-txt"
+          >
             Contact
           </a>
         </div>

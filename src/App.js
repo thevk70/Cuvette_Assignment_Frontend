@@ -56,7 +56,7 @@ function App() {
                 <Route path="/verification" element={<UserVerification />} />
               )}
               <Route path="/login" element={<Login />} />
-              <Route path="/jobForm" element={<JobForm />} />
+              {sessionStorage.getItem("token") != null && <Route path="/jobForm" element={<JobForm />} />}
               <Route path="/demo" element={<Demo />} />
             </React.Fragment>
           </Routes>
