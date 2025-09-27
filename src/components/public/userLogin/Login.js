@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser, setLoggedIn } from "../../../actions/UserAction";
 import { getBaseUrl } from "../../../config/utility";
 import Loader from "../../common/Loader/Loader";
+import LoginImage from "../../../../src/assets/login.png";
 
 function Login() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function Login() {
             illo dolor perspiciatis quas tempora libero, consequuntur at maxime
             delectus blanditiis eius in?
           </p>
+          {/* <img src={LoginImage} alt="login" className="login-image" /> */}
         </div>
         <div className="loginin">
           <h3>Log In</h3>

@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { postJob } from "../../../actions/UserAction";
 import { getBaseUrl } from "../../../config/utility";
 import Loader from "../../common/Loader/Loader";
+import PaymentButton from "../Payment/paymentButton";
 
 const JobForm = () => {
   const dispatch = useDispatch();
@@ -23,20 +24,24 @@ const JobForm = () => {
   const [addCandidates, setaddCandidates] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmit, setIsubmit] = useState(false);
-
+console.log(addCandidates.length);
+const validation = () => {
+  if (
+    title &&
+    description &&
+    location &&
+    salary &&
+    experienceLevel &&
+    endDate &&
+    addCandidates
+  ) {
+    return true;
+  } else {
+    setIsubmit(true);
+    return false;
+  }
+}
   const send = () => {
-  //   const newJob = {
-  //     title,
-  //     description,
-  //     location,
-  //     salary,
-  //     exprienceLevel,
-  //     endDate,
-  //     candidateEmails
-  // };
-  //   dispatch(postJob(getBaseUrl() + "job/createJob", newJob)).then(() =>
-  //     setIsLoading(false)
-  //   );
     if (
       title &&
       description &&
@@ -57,7 +62,6 @@ const JobForm = () => {
         addCandidates,
         userId: User._id,
       };
-      console.log(newJob);
       
       setIsLoading(true);
       dispatch(postJob(getBaseUrl() + "job/createJob", newJob)).then(() =>
@@ -149,9 +153,10 @@ const JobForm = () => {
             icon={<FaCalendarAlt />}
           />
         </div>
-        <button className="button" onClick={send}>
+        <PaymentButton emailsCounts = {addCandidates.length} send = {send} validation={validation}/>
+        {/* <button className="button" onClick={send}>
           Send
-        </button>
+        </button> */}
       </div>
     </>
   );
