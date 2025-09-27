@@ -17,7 +17,6 @@ function App() {
   const [toastVisible, setToastVisible] = useState(true);
   const serverRes = useSelector((Store) => Store.user);
   const isVerify = useSelector((Store) => Store.status);
-  console.log("isVerify: ", isVerify);
 
   useEffect(() => {
     setErrorMsg(serverRes.message);
